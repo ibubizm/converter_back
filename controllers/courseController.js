@@ -2,6 +2,19 @@ const db = require('../db.config')
 const ExchangeService = require('../services/exchangeService')
 
 class ExchangeController {
+  async getAll(req, res) {
+    try {
+      db.query('SELECT * FROM exchange_rate', async (err, result) => {
+        if (err) {
+          console.log(err)
+        }
+        return res.json(result)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   async getAllBy(req, res) {
     try {
       const { date, ticker } = req.body
